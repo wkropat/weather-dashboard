@@ -19,6 +19,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col s3">
+                <!-- Card for City Search and Search History -->
                 <div class="card teal lighten-2">
                     <div class="card-content white-text">
                         <span class="card-title">Search</span>
@@ -33,22 +34,31 @@
                 </div>
             </div>
 
-            <div class="col s6" id="weatherCard">
-                <div class="card teal lighten-2">
-                    <div class="card-content white-text">
-                        <span class="card-title">Weather</span>
+            <div class="row">
+                <div class="col s6" id="weatherCard">
+                    <!-- Card for Displaying Current City Weather -->
+                    <div class="card teal lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Weather</span>
+                            <h3 id="cityEl" class="align-middle"></h3>
+                            <img id="imgEl" alt="Weather Icon">
+                            <p id="tempEl"></p>
+                            <p id="humidityEl"></p>
+                            <p id="windEl"></p>
+                            <p id="uvEl"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s3" id="forecastCard">
+                    <!-- Card for Displaying 5 Day Forecast -->
+                    <div class="card teal lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Forecast</span>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col s3" id="forecastCard">
-                <div class="card teal lighten-2">
-                    <div class="card-content white-text">
-                        <span class="card-title">Forecast</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
