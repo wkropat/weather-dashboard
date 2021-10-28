@@ -23,43 +23,75 @@
                 <div class="card teal lighten-2">
                     <div class="card-content white-text">
                         <span class="card-title">Search</span>
-                        <div class="input-field white-text">
-                            <input type="text">
+                        <form class="input-field white-text" id="searchForm">
+                            <input type="text" id="cityInput">
                             <label class="cards white-text">City</label>
                             <button id="searchBtn">Search</button>
-                        </div>
+                        </form>
                         <div id="searchLog">Log City Searches here.</div>
-                        <button id="clearBtn">Search</button>
+                        <button id="clearBtn">Clear Search History</button>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col s6" id="weatherCard">
-                    <!-- Card for Displaying Current City Weather -->
-                    <div class="card teal lighten-2">
-                        <div class="card-content white-text">
-                            <span class="card-title">Weather</span>
-                            <h3 id="cityEl" class="align-middle"></h3>
-                            <img id="imgEl" alt="Weather Icon">
-                            <p id="tempEl"></p>
-                            <p id="humidityEl"></p>
-                            <p id="windEl"></p>
-                            <p id="uvEl"></p>
-                        </div>
+            <div class="col s9">
+                <!-- Card for Displaying Current City Weather -->
+                <div class="card teal lighten-2" id="weatherCard">
+                    <div class="card-content white-text">
+                        <span class="card-title">Current Weather</span>
+                        <h3 id="cityEl" class="align-middle"></h3>
+                        <img id="imgEl" alt="Weather Icon">
+                        <p id="tempEl">Temp</p>
+                        <p id="humidityEl">Humidity</p>
+                        <p id="windEl">Wind</p>
+                        <p id="uvEl">UV</p>
                     </div>
                 </div>
-
-                <div class="col s3" id="forecastCard">
-                    <!-- Card for Displaying 5 Day Forecast -->
+            </div>
+            <div class="row" id="forecastCard">
+                <!-- Cards for Displaying 5 Day Forecast -->
+                <div class="col s1" id="1">
                     <div class="card teal lighten-2">
                         <div class="card-content white-text">
                             <span class="card-title">Forecast</span>
+                            <div>Day 1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" id="2">
+                    <div class="card teal lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Forecast</span>
+                            <div>Day 2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" id="3">
+                    <div class="card teal lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Forecast</span>
+                            <div>Day 3</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" id="4">
+                    <div class="card teal lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Forecast</span>
+                            <div>Day 4</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" id="5">
+                    <div class="card teal lighten-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Forecast</span>
+                            <div>Day 5</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
