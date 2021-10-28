@@ -42,8 +42,16 @@ var searchHandler = function (event) {
     weatherEl.setAttribute("style", "display: ")
     forecastEl.setAttribute("style", "display: ")
     // Populate search history
-    searchlog.textContent(searchHistory);
+    console.log(searchHistory);
+    // searchLog.textContent();
 };
+
+var clearSearch = function (event) {
+    // Clear search history
+    searchLog.setAttribute("style","display:none");
+
+
+}
 
 function citySearch() {
     // Build url
@@ -75,25 +83,40 @@ function citySearch() {
                     imgEl.setAttribute("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png");
 
                     // Fill out 5 day forecast card
+
+                    
                     for (let i=1; i<6; i++) {
                         var dailyCard = document.getElementById(i);
+                        // Remove elements if exist
+                        if (dailyCard.children) {
+                            console.log(dailyCard.childNodes);
+                            // dailyCard.removeChild(dailyCard.childNodes[0]);
+                            // dailyCard.removeChild(dailyCard.childNodes[1]);
+                        };
+                        // Build elements and fill out data
+
                         dailyTitle = document.createElement("h4");
                         dailyTitle.setAttribute("class","card-title")
-                        dailyTitle.textContent = moment.unix(data.current.dt).format("MM-DD"); // WORK HERE TO AUTOMATE DATES
-                        dailyTemp = document.createElement("p");  
-                        dailyTemp = "Temp: " + data.daily[i].temp.day + "F";
-                        dailyWind = document.createElement("p");  
-                        dailyWind = "Wind: " + data.daily[i].wind_speed + "MPH";
-                        dailyHum = document.createElement("p");  
-                        dailyHum = "Humidity:" + data.daily[i].humidity + "%";
-                        dailyUV = document.createElement("p");  
-                        dailyUV = "UV Index:" + data.daily[i].uvi;
 
+                        let dailyTitleText = moment().format();
+                        dailyTitle.textContent = moment.unix(data.current.dt + i).format("dddd"); // WORK HERE TO AUTOMATE DATES
+                        dailyBody = document.createElement("div");
+                        dailyBody.setAttribute("class", "card-body");
+                        dailyIcon = document.createElement("img")
+                        dailyIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png");
+                        dailyTemp = document.createElement("p");  
+                        dailyTemp.textContent = "Temp: " + data.daily[i].temp.day + "F";
+                        dailyWind = document.createElement("p");  
+                        dailyWind.textContent = "Wind: " + data.daily[i].wind_speed + "MPH";
+                        dailyHum = document.createElement("p");  
+                        dailyHum.textContent = "Humidity: " + data.daily[i].humidity + "%";
+                        // Append all
                         dailyCard.appendChild(dailyTitle);
-                        dailyTitle.append(dailyTemp);
-                        dailyTitle.append(dailyWind);
-                        dailyTitle.append(dailyHum);
-                        dailyTitle.append(dailyUV);
+                        dailyCard.appendChild(dailyBody);
+                        dailyBody.appendChild(dailyTemp);
+                        dailyTemp.append(dailyWind);
+                        dailyWind.append(dailyHum);
+                        dailyHum.append(dailyIcon);
                     }
 
                 })
@@ -103,3 +126,4 @@ function citySearch() {
 
 // Event listener for search form    
 searchFormEl.addEventListener('submit', searchHandler);
+clearBtn.addEventListener('submit', clearSearch);
