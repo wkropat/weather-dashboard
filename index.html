@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/style.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 </head>
 
@@ -18,7 +19,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col s3">
+            <div class="col s2">
                 <!-- Card for City Search and Search History -->
                 <div class="card teal lighten-2">
                     <div class="card-content white-text">
@@ -33,12 +34,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col s9">
+            <div class="col s10">
                 <!-- Card for Displaying Current City Weather -->
-                <div class="card teal lighten-2" id="weatherCard">
+                <div class="card teal lighten-2 " id="weatherCard">
                     <div class="card-content white-text">
-                        <span class="card-title">Current Weather</span>
-                        <h3 id="cityEl" class="align-middle"></h3>
+
+                        <h3 class="card-title" id="cityEl" class="align-middle"></h3>
                         <img id="imgEl" alt="Weather Icon">
                         <p id="tempEl">Temp</p>
                         <p id="humidityEl">Humidity</p>
@@ -47,43 +48,44 @@
                     </div>
                 </div>
             </div>
+
             <div class="row" id="forecastCard">
                 <!-- Cards for Displaying 5 Day Forecast -->
-                <div class="col s1" id="1">
+                <div class="col s2">
                     <div class="card teal lighten-2">
-                        <div class="card-content white-text">
+                        <div class="card-content white-text" id="1">
                             <span class="card-title">Forecast</span>
                             <div>Day 1</div>
                         </div>
                     </div>
                 </div>
-                <div class="col s1" id="2">
+                <div class="col s2">
                     <div class="card teal lighten-2">
-                        <div class="card-content white-text">
+                        <div class="card-content white-text" id="2">
                             <span class="card-title">Forecast</span>
                             <div>Day 2</div>
                         </div>
                     </div>
                 </div>
-                <div class="col s1" id="3">
+                <div class="col s2">
                     <div class="card teal lighten-2">
-                        <div class="card-content white-text">
+                        <div class="card-content white-text" id="3">
                             <span class="card-title">Forecast</span>
                             <div>Day 3</div>
                         </div>
                     </div>
                 </div>
-                <div class="col s1" id="4">
+                <div class="col s2">
                     <div class="card teal lighten-2">
-                        <div class="card-content white-text">
+                        <div class="card-content white-text" id="4">
                             <span class="card-title">Forecast</span>
                             <div>Day 4</div>
                         </div>
                     </div>
                 </div>
-                <div class="col s1" id="5">
+                <div class="col s2">
                     <div class="card teal lighten-2">
-                        <div class="card-content white-text">
+                        <div class="card-content white-text" id="5">
                             <span class="card-title">Forecast</span>
                             <div>Day 5</div>
                         </div>
