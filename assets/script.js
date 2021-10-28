@@ -75,25 +75,26 @@ function citySearch() {
                     imgEl.setAttribute("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png");
 
                     // Fill out 5 day forecast card
-                    // for (let i=1; i=5; i++) {
-                    //     var dailyCard = document.getElementById(i);
-                    //     dailyTitle = document.createElement("h4");
-                    //     dailyTitle.textContent = moment.unix(data.current.dt).format("MM-DD"); // WORK HERE TO AUTOMATE DATES
-                    //     dailyTemp = document.createElement("div");  
-                    //     dailyTemp = "Temp: " + data.daily[i].temp.day + "F";
-                    //     dailyWind = document.createElement("div");  
-                    //     dailyWind = "Wind: " + data.daily[i].wind_speed + "MPH";
-                    //     dailyHum = document.createElement("div");  
-                    //     dailyHum = "Humidity:" + data.daily[i].humidity + "%";
-                    //     dailyUV = document.createElement("div");  
-                    //     dailyUV = "UV Index:" + data.daily[i].uvi;
+                    for (let i=1; i<6; i++) {
+                        var dailyCard = document.getElementById(i);
+                        dailyTitle = document.createElement("h4");
+                        dailyTitle.setAttribute("class","card-title")
+                        dailyTitle.textContent = moment.unix(data.current.dt).format("MM-DD"); // WORK HERE TO AUTOMATE DATES
+                        dailyTemp = document.createElement("p");  
+                        dailyTemp = "Temp: " + data.daily[i].temp.day + "F";
+                        dailyWind = document.createElement("p");  
+                        dailyWind = "Wind: " + data.daily[i].wind_speed + "MPH";
+                        dailyHum = document.createElement("p");  
+                        dailyHum = "Humidity:" + data.daily[i].humidity + "%";
+                        dailyUV = document.createElement("p");  
+                        dailyUV = "UV Index:" + data.daily[i].uvi;
 
-                    //     dailyCard.appendChild(dailyTitle);
-                    //     dailyTitle.append(dailyTemp);
-                    //     dailyTitle.append(dailyWind);
-                    //     dailyTitle.append(dailyHum);
-                    //     dailyTitle.append(dailyUV);
-                    // }
+                        dailyCard.appendChild(dailyTitle);
+                        dailyTitle.append(dailyTemp);
+                        dailyTitle.append(dailyWind);
+                        dailyTitle.append(dailyHum);
+                        dailyTitle.append(dailyUV);
+                    }
 
                 })
         });
