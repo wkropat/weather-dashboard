@@ -42,16 +42,23 @@ var searchHandler = function (event) {
     weatherEl.setAttribute("style", "display: ")
     forecastEl.setAttribute("style", "display: ")
     // Populate search history
-    searchHistory += city
-    // localStorage.setItem("search", searchHistory)
-    // searchLogEl.textContent(searchHistory);
+    searchHistory.push(city);
+    localStorage.setItem("search", JSON.stringify(searchHistory));
+    searchLogEl.innerHTML = "";
+    for (let i = 0; i < searchHistory.length; i++) {
+        const historyItem = document.createElement("li");
+        historyItem.textContent = searchHistory[i];
+        searchLogEl.append(historyItem);
+    };
 };
 
 var clearSearch = function (event) {
+    event.preventDefault;
     // Clear search history
     localStorage.clear();
     searchHistory = [];
-    renderSearchHistory();
+    searchLogEl.innerHTML = "";
+    // renderSearchHistory();
 }
 
 function citySearch() {
@@ -69,7 +76,6 @@ function citySearch() {
             queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=minutely,hourly,alerts&appid=" + APIKey;
             fetch(queryURL)  //use lat and lon to get 5 day weather info and place into html
                 .then(function (response) {
-
                     return response.json();
                 })
                 .then(function (data) {
@@ -84,7 +90,6 @@ function citySearch() {
                     imgEl.setAttribute("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png");
 
                     // Fill out 5 day forecast card
-
 
                     for (let i = 1; i < 6; i++) {
                         var dailyCard = document.getElementById(i);
@@ -118,15 +123,8 @@ function citySearch() {
         });
 };
 
-function renderSearchHistory() {
-    searchLogEl.innerHTML = "";
-    for (let i = 0; i < searchHistory.length; i++) {
-        const historyItem = document.createElement("li");
-        historyItem.textContent = searchHistory[i];
-        searchLogEl.append(historyItem);
-    };
-};
-renderSearchHistory();
+
+
 // Event listener for search form    
 searchFormEl.addEventListener('submit', searchHandler);
-clearBtn.addEventListener('submit', clearSearch);
+clearBtn.addEventListener('click', clearSearch);
