@@ -22,10 +22,10 @@ const searchBtn = document.getElementById("searchBtn");
 const clearBtn = document.getElementById("clearBtn");
 // SearchLog is list of city searches (10 max)
 const searchLog = document.getElementById("searchLog");
-// Search History is either in storage or an empty array
-var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+// Search History is either in storage or an empty arrayJSON.parse(localStorage.getItem("search")) ||
+var searchHistory =  [];
 // API Key for Open Weather Map
-const APIKey = "6b894668462b2c8b27ea57b5838cdacb";
+const APIKey = "eccb59d771262a250904ed938914d222";
 //Event handler for searching a city
 // Start by hiding the empty cards
 weatherEl.setAttribute("style", "display:none");
@@ -42,15 +42,16 @@ var searchHandler = function (event) {
     weatherEl.setAttribute("style", "display: ")
     forecastEl.setAttribute("style", "display: ")
     // Populate search history
-    console.log(searchHistory);
-    // searchLog.textContent();
+    searchHistory += city
+    // localStorage.setItem("search", searchHistory)
+    // searchLogEl.textContent(searchHistory);
 };
 
 var clearSearch = function (event) {
     // Clear search history
-    searchLog.setAttribute("style","display:none");
-
-
+    localStorage.clear();
+    searchHistory = [];
+    renderSearchHistory();
 }
 
 function citySearch() {
@@ -74,8 +75,8 @@ function citySearch() {
                 .then(function (data) {
                     // Fill out current weather card
                     cityText = city.charAt(0).toUpperCase() + city.slice(1);
-                    dateText = moment.unix(data.current.dt).format("MM-DD-YY");
-                    cityEl.textContent = cityText + " weather on " + dateText;
+                    dateText = moment.unix(data.current.dt).format("dddd, MMM Do YYYY");
+                    cityEl.textContent = "Current Conditions in " + cityText + " on " + dateText;
                     tempEl.textContent = "Temperature: " + data.current.temp + " Deg F";
                     windEl.textContent = "Wind-Speed: " + data.current.wind_speed + "mph";
                     humidityEl.textContent = "Humidity: " + data.current.humidity + "%";
@@ -84,31 +85,25 @@ function citySearch() {
 
                     // Fill out 5 day forecast card
 
-                    
-                    for (let i=1; i<6; i++) {
+
+                    for (let i = 1; i < 6; i++) {
                         var dailyCard = document.getElementById(i);
                         // Remove elements if exist
-                        if (dailyCard.children) {
-                            console.log(dailyCard.childNodes);
-                            // dailyCard.removeChild(dailyCard.childNodes[0]);
-                            // dailyCard.removeChild(dailyCard.childNodes[1]);
-                        };
+                        dailyCard.innerHTML = "";
                         // Build elements and fill out data
-
                         dailyTitle = document.createElement("h4");
-                        dailyTitle.setAttribute("class","card-title")
-
-                        let dailyTitleText = moment().format();
-                        dailyTitle.textContent = moment.unix(data.current.dt + i).format("dddd"); // WORK HERE TO AUTOMATE DATES
+                        dailyTitle.setAttribute("class", "card-title")
+                        let dailyTitleText = moment().add(i,'days');
+                        dailyTitle.textContent = dailyTitleText.format("dddd"); // WORK HERE TO AUTOMATE DATES
                         dailyBody = document.createElement("div");
                         dailyBody.setAttribute("class", "card-body");
                         dailyIcon = document.createElement("img")
                         dailyIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png");
-                        dailyTemp = document.createElement("p");  
+                        dailyTemp = document.createElement("p");
                         dailyTemp.textContent = "Temp: " + data.daily[i].temp.day + "F";
-                        dailyWind = document.createElement("p");  
+                        dailyWind = document.createElement("p");
                         dailyWind.textContent = "Wind: " + data.daily[i].wind_speed + "MPH";
-                        dailyHum = document.createElement("p");  
+                        dailyHum = document.createElement("p");
                         dailyHum.textContent = "Humidity: " + data.daily[i].humidity + "%";
                         // Append all
                         dailyCard.appendChild(dailyTitle);
@@ -123,7 +118,15 @@ function citySearch() {
         });
 };
 
-
+function renderSearchHistory() {
+    searchLogEl.innerHTML = "";
+    for (let i = 0; i < searchHistory.length; i++) {
+        const historyItem = document.createElement("li");
+        historyItem.textContent = searchHistory[i];
+        searchLogEl.append(historyItem);
+    };
+};
+renderSearchHistory();
 // Event listener for search form    
 searchFormEl.addEventListener('submit', searchHandler);
 clearBtn.addEventListener('submit', clearSearch);
