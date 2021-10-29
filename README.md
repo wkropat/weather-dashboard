@@ -20,7 +20,7 @@ This website shows current weather and forecast for a given city. There is a sea
   Visit https://wkropat.github.io/weather-dashboard/
         
 ## Screenshot
-![Screenshot](./screenshot.png)
+![Screenshot](./assets/screenshot.png)
       
 ## Contribution
   _Are contributions welcome?_
