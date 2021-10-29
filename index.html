@@ -31,7 +31,7 @@
                             <button class="teal lighten-5 waves-effect waves-light btn-flat"
                                 id="searchBtn">Search</button>
                         </form>
-                        <ul id="searchLog"></ul>
+                        <div class="container" id="searchLog"></div>
                         <button class="teal lighten-5 waves-effect waves-light btn-flat" id="clearBtn">Clear History</button>
                     </div>
                 </div>
@@ -39,14 +39,14 @@
 
             <div class="col s10 ">
                 <!-- Card for Displaying Current City Weather -->
-                <div class="card teal lighten-2 " id="weatherCard">
-                    <div class="center card-content white-text">
+                <div class="card teal lighten-5 " id="weatherCard">
+                    <div class="center card-content">
                         <h3 class="card-title" id="cityEl"></h3>
                         <img id="imgEl" alt="Weather Icon">
                         <p id="tempEl">Temp</p>
                         <p id="humidityEl">Humidity</p>
                         <p id="windEl">Wind</p>
-                        <p id="uvEl">UV</p>
+                        <span id="uvEl"></span>
                     </div>
                 </div>
             </div>

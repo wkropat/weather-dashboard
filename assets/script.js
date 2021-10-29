@@ -23,7 +23,7 @@ const clearBtn = document.getElementById("clearBtn");
 // SearchLog is list of city searches (10 max)
 const searchLog = document.getElementById("searchLog");
 // Search History is either in storage or an empty arrayJSON.parse(localStorage.getItem("search")) ||
-var searchHistory =  [];
+var searchHistory = [];
 // API Key for Open Weather Map
 const APIKey = "eccb59d771262a250904ed938914d222";
 //Event handler for searching a city
@@ -46,9 +46,18 @@ var searchHandler = function (event) {
     localStorage.setItem("search", JSON.stringify(searchHistory));
     searchLogEl.innerHTML = "";
     for (let i = 0; i < searchHistory.length; i++) {
-        const historyItem = document.createElement("li");
+        // Make each searched city a clickable button
+        const historyItem = document.createElement("button");
+        // historyItem.setAttribute("type", "text");
+        historyItem.setAttribute("class", "display-block teal lighten-5 waves-effect waves-light btn-flat");
+        historyItem.setAttribute("value", searchHistory[i]);
         historyItem.textContent = searchHistory[i];
+        historyItem.addEventListener("click", function () {
+            citySearch(historyItem.value);
+        })
         searchLogEl.append(historyItem);
+        const breakEl = document.createElement("br");
+        searchLogEl.append(breakEl);
     };
 };
 
@@ -58,10 +67,10 @@ var clearSearch = function (event) {
     localStorage.clear();
     searchHistory = [];
     searchLogEl.innerHTML = "";
-    // renderSearchHistory();
+
 }
 
-function citySearch() {
+function citySearch(city) {
     // Build url
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     fetch(queryURL)
@@ -86,7 +95,15 @@ function citySearch() {
                     tempEl.textContent = "Temperature: " + data.current.temp + " Deg F";
                     windEl.textContent = "Wind-Speed: " + data.current.wind_speed + "mph";
                     humidityEl.textContent = "Humidity: " + data.current.humidity + "%";
+                    // Set UV Index badge colors
                     uvEl.textContent = "UV Index: " + data.current.uvi;
+                    if (data.current.uvi < 4) {
+                        uvEl.setAttribute("class", "badge green");
+                    } else if (data.current.uvi < 9) {
+                        uvEl.setAttribute("class", "badge yellow");
+                    } else {
+                        uvEl.setAttribute("class", "badge red white-text");
+                    }
                     imgEl.setAttribute("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png");
 
                     // Fill out 5 day forecast card
@@ -98,7 +115,7 @@ function citySearch() {
                         // Build elements and fill out data
                         dailyTitle = document.createElement("h4");
                         dailyTitle.setAttribute("class", "card-title")
-                        let dailyTitleText = moment().add(i,'days');
+                        let dailyTitleText = moment().add(i, 'days');
                         dailyTitle.textContent = dailyTitleText.format("dddd"); // WORK HERE TO AUTOMATE DATES
                         dailyBody = document.createElement("div");
                         dailyBody.setAttribute("class", "card-body");
